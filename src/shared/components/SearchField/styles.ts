@@ -1,6 +1,6 @@
 import {createStyles, makeStyles} from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() => createStyles({
+const useStyles = makeStyles((theme) => createStyles({
     searchWrapper: {
         position: 'relative',
         borderBottom: '1px solid #e9ecf4',
@@ -16,6 +16,9 @@ const useStyles = makeStyles(() => createStyles({
         maxHeight: 250,
         overflow: 'scroll',
         backgroundColor: '#FCFCFC',
+        [theme.breakpoints.down('md')]: {
+            left: 0,
+        },
     },
     suggestionItem: {
       cursor: 'pointer',
@@ -24,7 +27,7 @@ const useStyles = makeStyles(() => createStyles({
         width: 80,
     },
     suggestionName: {
-        width: 'calc(100% - 80px)'
+        width: 'calc(100% - 80px)',
     },
     clip: {
         padding: 5,

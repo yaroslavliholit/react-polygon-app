@@ -1,8 +1,11 @@
 import {createStyles, makeStyles} from "@material-ui/core/styles";
 
-const useStyles = makeStyles(createStyles({
+const useStyles = makeStyles((theme) => createStyles({
     pageWrapper: {
-        padding: '40px 50px'
+        padding: '40px 50px',
+        [theme.breakpoints.down('md')]: {
+            padding: '30px',
+        },
     },
     header: {
         display: 'flex',
@@ -40,6 +43,9 @@ const useStyles = makeStyles(createStyles({
     },
     pageSectionItem: {
         width: '48%',
+        [theme.breakpoints.down('md')]: {
+            width: '100%',
+        },
     },
     infoList: {
         margin: 0,

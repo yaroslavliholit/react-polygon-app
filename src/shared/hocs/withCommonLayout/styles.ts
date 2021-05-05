@@ -20,9 +20,15 @@ const useStyles = makeStyles((theme) => createStyles({
         [theme.breakpoints.up('md')]: {
             backgroundColor: '#b6b7c3',
         },
+        [theme.breakpoints.down('md')]: {
+            display: 'none',
+        },
     },
     contentWrapper: {
         width: 'calc(100% - 75px)',
+        [theme.breakpoints.down('md')]: {
+            width: '100%',
+        },
     },
 }));
 
