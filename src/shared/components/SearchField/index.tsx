@@ -10,7 +10,13 @@ import useSearchTickers from "../../../hooks/useSearchTickers";
 
 const SearchField = () => {
     const cn = useStyles();
-    const { searchQuery, suggestions, handleSelectSuggestion, handleChangeSearchQuery} = useSearchTickers();
+    const {
+        isSearchEmpty,
+        searchQuery,
+        suggestions,
+        handleSelectSuggestion,
+        handleChangeSearchQuery
+    } = useSearchTickers();
 
     return (
         <div className={cn.searchWrapper}>
@@ -24,7 +30,7 @@ const SearchField = () => {
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position={'start'}>
-                            <SearchIcon />
+                            <SearchIcon htmlColor={'#b6b7c3'} />
                         </InputAdornment>
                     ),
                     classes:{notchedOutline:cn.searchField}
@@ -32,13 +38,16 @@ const SearchField = () => {
             />
             <div className={cn.suggestionsWrapper}>
                 <List>
+                    {isSearchEmpty && (
+                        <ListItem>No Results found</ListItem>
+                    )}
                     {searchQuery && suggestions.map(e => (
-                        <ListItem key={e.ticker} onClick={handleSelectSuggestion(e.ticker)}>
+                        <ListItem key={e.ticker} className={cn.suggestionItem} onClick={handleSelectSuggestion(e.ticker)}>
                             <div className={cn.suggestionTicker}>
                                 <ListItemText>{e.ticker}</ListItemText>
                             </div>
                             <div className={cn.suggestionName}>
-                                <ListItemText>{e.name}</ListItemText>
+                                <ListItemText className={cn.clip}>{e.name}</ListItemText>
                             </div>
                         </ListItem>
                     ))}

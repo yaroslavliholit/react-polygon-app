@@ -8,6 +8,8 @@ const useSearchTickers = () => {
     const history = useHistory();
     const [searchQuery, setSearchQuery] = useState('');
     const [suggestions, setSuggestions] = useState<ITickers[]>([]);
+
+    const isSearchEmpty = Boolean(searchQuery.length && !suggestions.length);
     // ****** DATA END ******
 
     // ****** CALLBACKS START ******
@@ -27,7 +29,8 @@ const useSearchTickers = () => {
     }, [searchQuery]);
 
     const handleSelectSuggestion = useCallback((ticker: string) => () => {
-        history.push(`/symbol/${ticker}`)
+        history.push(`/symbol/${ticker}`);
+        setSearchQuery('');
     }, [history]);
     // ****** CALLBACKS END ******
 
@@ -40,15 +43,17 @@ const useSearchTickers = () => {
     // ****** EFFECTS END ******
 
     return useMemo(() => ({
+        isSearchEmpty,
         suggestions,
         searchQuery,
         handleChangeSearchQuery,
         handleSelectSuggestion,
     }), [
+        isSearchEmpty,
         suggestions,
         searchQuery,
         handleSelectSuggestion,
-        handleSelectSuggestion,
+        handleChangeSearchQuery,
     ]);
 };
 
