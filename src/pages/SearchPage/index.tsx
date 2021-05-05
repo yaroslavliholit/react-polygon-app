@@ -1,7 +1,6 @@
-import React, {memo} from 'react';
+import React from 'react';
+import withCommonLayout from '../../shared/hocs/withCommonLayout';
 
-const SearchPage = () => (
-    <div></div>
-);
+const SearchPage = () => <div />
 
-export default memo(SearchPage);
+export default withCommonLayout(SearchPage);
