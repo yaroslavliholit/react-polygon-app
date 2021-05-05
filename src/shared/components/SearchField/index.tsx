@@ -3,7 +3,6 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import useStyles from './styles';
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -11,14 +10,14 @@ import useSearchTickers from "../../../hooks/useSearchTickers";
 
 const SearchField = () => {
     const cn = useStyles();
-    const { searchQuery, suggestions, handleSelectSuggestion, handleChangeValue} = useSearchTickers();
+    const { searchQuery, suggestions, handleSelectSuggestion, handleChangeSearchQuery} = useSearchTickers();
 
     return (
         <div className={cn.searchWrapper}>
             <TextField
                 fullWidth
                 value={searchQuery}
-                onChange={handleChangeValue}
+                onChange={handleChangeSearchQuery}
                 variant="outlined"
                 className={cn.searchField}
                 placeholder={'Search symbols or companies'}

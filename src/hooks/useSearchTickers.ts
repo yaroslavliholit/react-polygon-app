@@ -1,8 +1,7 @@
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {ITickers} from "@polygon.io/client-js";
-import polygonReferenceClient from '../api/polygonReferenceClient';
+import {polygonReferenceClient} from '../api/polygonReferenceClient';
 import { useHistory } from 'react-router-dom';
-import ROUTES_PATHS from "../app/routes/paths";
 
 const useSearchTickers = () => {
     // ****** DATA START ******
@@ -12,7 +11,7 @@ const useSearchTickers = () => {
     // ****** DATA END ******
 
     // ****** CALLBACKS START ******
-    const handleChangeValue = useCallback((e) => {
+    const handleChangeSearchQuery = useCallback((e) => {
         setSearchQuery(e.target.value);
     }, []);
 
@@ -28,7 +27,7 @@ const useSearchTickers = () => {
     }, [searchQuery]);
 
     const handleSelectSuggestion = useCallback((ticker: string) => () => {
-        history.push(ROUTES_PATHS.symbolDetails(ticker))
+        history.push(`/symbol/${ticker}`)
     }, [history]);
     // ****** CALLBACKS END ******
 
@@ -43,12 +42,12 @@ const useSearchTickers = () => {
     return useMemo(() => ({
         suggestions,
         searchQuery,
-        handleChangeValue,
+        handleChangeSearchQuery,
         handleSelectSuggestion,
     }), [
         suggestions,
         searchQuery,
-        handleChangeValue,
+        handleSelectSuggestion,
         handleSelectSuggestion,
     ]);
 };

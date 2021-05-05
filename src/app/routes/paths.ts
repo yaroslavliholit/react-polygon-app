@@ -1,6 +1,6 @@
 const ROUTES_PATHS = {
     search: '/',
-    symbolDetails: (id: string) => `/symbol/${id}`
+    symbolDetails: '/symbol/:id'
 };
 
 export default ROUTES_PATHS;

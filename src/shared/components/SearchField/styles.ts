@@ -13,6 +13,7 @@ const useStyles = makeStyles(() => createStyles({
         top: 60,
         left: 20,
         maxWidth: 600,
+        backgroundColor: '#ffffff'
     },
     suggestionTicker: {
         width: 80,
