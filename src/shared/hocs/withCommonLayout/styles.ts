@@ -7,18 +7,18 @@ const useStyles = makeStyles((theme) => createStyles({
         backgroundColor: '#FCFCFC',
     },
     logo: {
-        width: 40,
-        height: 40,
+        width: 35,
+        height: 35,
         margin: '10px auto',
         borderRadius: '50%',
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: '#001458',
     },
     drawer: {
-        width: 75,
+        width: 72,
         height: '100vh',
         border: 'none',
         [theme.breakpoints.up('md')]: {
-            backgroundColor: 'lightgray',
+            backgroundColor: '#b6b7c3',
         },
     },
     contentWrapper: {

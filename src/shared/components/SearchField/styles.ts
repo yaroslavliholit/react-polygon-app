@@ -3,7 +3,7 @@ import {createStyles, makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles(() => createStyles({
     searchWrapper: {
         position: 'relative',
-        borderBottom: '1px solid lightgray',
+        borderBottom: '1px solid #e9ecf4',
     },
     searchField: {
         border: 'none'
@@ -13,7 +13,12 @@ const useStyles = makeStyles(() => createStyles({
         top: 60,
         left: 20,
         maxWidth: 600,
-        backgroundColor: '#ffffff'
+        maxHeight: 250,
+        overflow: 'scroll',
+        backgroundColor: '#FCFCFC',
+    },
+    suggestionItem: {
+      cursor: 'pointer',
     },
     suggestionTicker: {
         width: 80,
@@ -21,6 +26,12 @@ const useStyles = makeStyles(() => createStyles({
     suggestionName: {
         width: 'calc(100% - 80px)'
     },
+    clip: {
+        padding: 5,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+    }
 }));
 
 export default useStyles;
