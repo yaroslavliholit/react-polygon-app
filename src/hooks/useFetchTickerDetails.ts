@@ -4,9 +4,9 @@ import {ITickerDetailsFormatted} from "@polygon.io/client-js";
 import {getFormatDate} from '../shared/utils/date';
 
 const useFetchTickerDetails = (id: string) => {
+    const [networkError, setNetworkError] = useState(false);
     const [tickerDetails, setTickerDetails] = useState<Nullable<ITickerDetailsFormatted>>(null);
     const [tickerDetailsLoading, setTickerDetailsLoading] = useState(false);
-
     const [lastAvailablePrice, setLastAvailablePrice] = useState<Nullable<number>>(null);
     const [priceDifference, setPriceDifference] = useState<Nullable<number>>(null);
     const [changePercent, setChangePercent] = useState<Nullable<number>>(null);
@@ -30,6 +30,7 @@ const useFetchTickerDetails = (id: string) => {
 
         setAggregatesBars(formatterResult);
         } catch (e) {
+            setNetworkError(true);
             console.error(e)
         }
     }, [id]);
@@ -57,6 +58,7 @@ const useFetchTickerDetails = (id: string) => {
                 setChangePercent(Number(((priceCalculation * 100) / endOfDayClosePrice).toFixed(1)));
             }
         } catch (e) {
+            setNetworkError(true);
             console.error(e);
         } finally {
             setStocksDetailsLoading(false);
@@ -69,6 +71,7 @@ const useFetchTickerDetails = (id: string) => {
           const result = await polygonReferenceClient.tickerDetails(id);
           setTickerDetails(result);
         } catch (e) {
+            setNetworkError(true);
             console.error(e)
         } finally {
             setTickerDetailsLoading(false);
@@ -82,6 +85,7 @@ const useFetchTickerDetails = (id: string) => {
     }, [handleFetchTickerDetails, handleFetchDailyPrice, handleFetchAggregatesBars]);
 
     return useMemo(() => ({
+        networkError,
         isAnyLoading,
         aggregatesBars,
         tickerDetails,
@@ -89,6 +93,7 @@ const useFetchTickerDetails = (id: string) => {
         priceDifference,
         changePercent,
     }), [
+        networkError,
         isAnyLoading,
         aggregatesBars,
         tickerDetails,

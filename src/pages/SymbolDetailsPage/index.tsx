@@ -9,6 +9,7 @@ import { ReactComponent as DownArrow } from '../../shared/assets/icons/down-arro
 import { ReactComponent as UpArrow } from '../../shared/assets/icons/up-arrow.svg';
 import ShowMoreText from "../../shared/components/ShowMoreText";
 import {CircularProgress} from '@material-ui/core';
+import Typography from "@material-ui/core/Typography";
 
 const SymbolDetailsPage = () => {
     const history = useHistory();
@@ -16,6 +17,7 @@ const SymbolDetailsPage = () => {
 
     const { id } = useParams<{ id: string }>();
     const {
+        networkError,
         isAnyLoading,
         tickerDetails,
         lastAvailablePrice,
@@ -37,11 +39,21 @@ const SymbolDetailsPage = () => {
 
     const isPositiveNumber = Math.sign(priceDifference || -1) !== -1;
 
-    if (isAnyLoading) return (
-        <div className={cn.loadingWrapper}>
-            <CircularProgress />
-        </div>
-    );
+    if (isAnyLoading) {
+        return (
+            <div className={cn.networkIndicatorWrapper}>
+                <CircularProgress />
+            </div>
+        );
+    }
+
+    if (networkError) {
+        return (
+            <div className={cn.networkIndicatorWrapper}>
+                <Typography variant={'h4'}>Something went wrong. Please try again later.</Typography>
+            </div>
+        );
+    }
 
     if (!tickerDetails || !aggregatesBars.length) return null;
 

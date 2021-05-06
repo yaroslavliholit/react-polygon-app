@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => createStyles({
             padding: '30px',
         },
     },
-    loadingWrapper: {
+    networkIndicatorWrapper: {
         width: '100%',
         height: '100vh',
         display: 'flex',
