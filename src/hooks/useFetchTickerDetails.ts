@@ -5,16 +5,41 @@ import {getFormatDate} from '../shared/utils/date';
 
 const useFetchTickerDetails = (id: string) => {
     const [loading, setLoading] = useState(false);
+    const [lastAvailablePrice, setLastAvailablePrice] = useState<Nullable<number>>(null);
+    const [priceDifference, setPriceDifference] = useState<Nullable<number>>(null);
+    const [tickerDetails, setTickerDetails] = useState<Nullable<ITickerDetailsFormatted>>(null);
+    const [changePercent, setChangePercent] = useState<Nullable<number>>(null);
 
-    const [lastAvailablePrice, setLastAvailablePrice] = useState<number | null>(null);
-    const [priceDifference, setPriceDifference] = useState<number | null>(null);
-    const [tickerDetails, setTickerDetails] = useState<ITickerDetailsFormatted | null>(null);
-    const [changePercent, setChangePercent] = useState<number | null>(null);
+    const [aggregatesBars, setAggregatesBars] = useState<AggregatesBar[]>([]);
+
+    const handleFetchAggregatesBars = useCallback(async () => {
+        try {
+          const currentMouth = getFormatDate({ date: new Date() });
+          const prevMouth = getFormatDate({ date: new Date(), extraMonth: -1 });
+
+          const { results } = await polygonRestClient.stocks.aggregates(
+              id, 1, 'day', prevMouth, currentMouth
+          );
+
+          const formatterResult = results.map(e => ({
+              value: e.c
+          }));
+
+        setAggregatesBars(formatterResult);
+        } catch (e) {
+            console.error(e)
+        }
+    }, [id]);
 
     const handleFetchDailyPrice = useCallback(async () => {
         try {
-            const { close: currentClose } = await polygonRestClient.stocks.dailyOpenClose(id, getFormatDate(new Date(), -1));
-            const { close: prevClose } = await polygonRestClient.stocks.dailyOpenClose(id, getFormatDate(new Date(), -2));
+            const { close: currentClose } = await polygonRestClient.stocks.dailyOpenClose(
+                id, getFormatDate({ date: new Date(), extraDay:  -1 })
+            );
+
+            const { close: prevClose } = await polygonRestClient.stocks.dailyOpenClose(
+                id, getFormatDate({ date: new Date(), extraDay:  -2 })
+            );
 
             const endOfDayClosePrice = currentClose as unknown as number;
             const prevDayClosePrice = prevClose as unknown as number;
@@ -47,15 +72,24 @@ const useFetchTickerDetails = (id: string) => {
     useEffect(() => {
         handleFetchTickerDetails();
         handleFetchDailyPrice();
-    }, [handleFetchTickerDetails, handleFetchDailyPrice]);
+        handleFetchAggregatesBars();
+    }, [handleFetchTickerDetails, handleFetchDailyPrice, handleFetchAggregatesBars]);
 
     return useMemo(() => ({
         loading,
+        aggregatesBars,
         tickerDetails,
         lastAvailablePrice,
         priceDifference,
         changePercent,
-    }), [loading, tickerDetails, lastAvailablePrice, priceDifference, changePercent]);
+    }), [
+        loading,
+        aggregatesBars,
+        tickerDetails,
+        lastAvailablePrice,
+        priceDifference,
+        changePercent
+    ]);
 };
 
 export default useFetchTickerDetails;

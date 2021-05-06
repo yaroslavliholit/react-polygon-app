@@ -1,7 +1,13 @@
-export function getFormatDate(d: Date, extraDay = 0) {
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + (d.getDate() + extraDay);
-    let year = d.getFullYear();
+interface Params {
+    date: Date;
+    extraDay?: number;
+    extraMonth?: number;
+}
+
+export function getFormatDate({ date, extraDay = 0, extraMonth = 0 }: Params) {
+    let month = '' + ((date.getMonth() + 1) + extraMonth);
+    let day = '' + (date.getDate() + extraDay);
+    let year = date.getFullYear();
 
     if (month.length < 2)
         month = '0' + month;

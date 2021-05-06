@@ -4,7 +4,7 @@ import {useHistory, useParams} from 'react-router-dom';
 import useFetchTickerDetails from "../../hooks/useFetchTickerDetails";
 import TagsList from '../../shared/components/TagsList';
 import useStyles from './styles';
-
+import SymbolChart from '../../shared/components/SymbolChart';
 import { ReactComponent as DownArrow } from '../../shared/assets/icons/down-arrow.svg';
 import { ReactComponent as UpArrow } from '../../shared/assets/icons/up-arrow.svg';
 
@@ -13,7 +13,13 @@ const SymbolDetailsPage = () => {
     const cn = useStyles();
 
     const { id } = useParams<{ id: string }>();
-    const { tickerDetails, lastAvailablePrice, priceDifference, changePercent } = useFetchTickerDetails(id);
+    const {
+        tickerDetails,
+        lastAvailablePrice,
+        priceDifference,
+        changePercent,
+        aggregatesBars
+    } = useFetchTickerDetails(id);
 
     const handleSelectSuggestion = useCallback((ticker: string) => {
         history.push(`/symbol/${ticker}`);
@@ -28,11 +34,11 @@ const SymbolDetailsPage = () => {
 
     const isPositiveNumber = Math.sign(priceDifference || -1) !== -1;
 
-    if (!tickerDetails) return null;
+    if (!tickerDetails || !aggregatesBars.length) return null;
 
     return (
         <div className={cn.pageWrapper}>
-            <div className={cn.header}>
+            <section className={cn.header}>
                 <div className={cn.headerInfoContainer}>
                     <div className={cn.symbolTitle}>{tickerDetails.symbol}</div>
                     <div>{tickerDetails.name}</div>
@@ -45,7 +51,10 @@ const SymbolDetailsPage = () => {
                         <span className={isPositiveNumber ? cn.pricePositive : cn.priceLow}>{changePercent}%</span>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <SymbolChart chartData={aggregatesBars} />
+
             <section className={cn.pageSection}>
                 <div className={cn.pageSectionItem}>
                     <h2 className={cn.pageSubTitle}>About {tickerDetails.symbol}</h2>

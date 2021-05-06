@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => createStyles({
     },
     drawer: {
         width: 72,
-        height: '100vh',
+        minHeight: '100vh',
+        height: 'inherit',
         border: 'none',
         [theme.breakpoints.up('md')]: {
             backgroundColor: '#b6b7c3',
