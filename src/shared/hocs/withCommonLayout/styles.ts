@@ -18,16 +18,16 @@ const useStyles = makeStyles((theme) => createStyles({
         minHeight: '100vh',
         height: 'inherit',
         border: 'none',
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('sm')]: {
             backgroundColor: theme.palette.text.disabled,
         },
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('sm')]: {
             display: 'none',
         },
     },
     contentWrapper: {
         width: 'calc(100% - 75px)',
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('sm')]: {
             width: '100%',
         },
     },

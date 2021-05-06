@@ -21,7 +21,7 @@ const TagsList = ({items, colors, title, onItemClick}: Props) => {
     return (
         <>
             {Boolean(items?.length) && (
-                <>
+                <div>
                     <h2>{title}</h2>
                     <div className={cn.tagsWrapper}>
                         {items?.map((e, index) => {
@@ -33,11 +33,14 @@ const TagsList = ({items, colors, title, onItemClick}: Props) => {
                                     key={e}
                                     className={cn.tagItem}
                                     style={{ backgroundColor }}
-                                    onClick={handleItemClick(e)}>{e}</div>
+                                    onClick={handleItemClick(e)}
+                                >
+                                    {e}
+                                </div>
                             )
                         })}
                     </div>
-                </>
+                </div>
             )}
         </>
     );

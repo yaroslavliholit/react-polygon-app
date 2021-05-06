@@ -8,6 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import useSearchTickers from "../../../hooks/useSearchTickers";
 import {CircularProgress} from '@material-ui/core';
+import {ReactComponent as MenuIcon} from '../../assets/icons/menu.svg';
 
 const SearchField = () => {
     const cn = useStyles();
@@ -22,6 +23,9 @@ const SearchField = () => {
 
     return (
         <div className={cn.searchWrapper}>
+            <div className={cn.menuButtonWrapper}>
+                <MenuIcon />
+            </div>
             <TextField
                 fullWidth
                 value={searchQuery}
@@ -54,7 +58,7 @@ const SearchField = () => {
                                 <ListItemText>{e.ticker}</ListItemText>
                             </div>
                             <div className={cn.suggestionName}>
-                                <ListItemText className={cn.clip}>{e.name}</ListItemText>
+                                <div className={cn.clip}>{e.name}</div>
                             </div>
                         </ListItem>
                     ))}

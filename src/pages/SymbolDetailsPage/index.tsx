@@ -65,9 +65,9 @@ const SymbolDetailsPage = () => {
                     <div className={cn.symbolTitle}>{tickerDetails.symbol}</div>
                     <div>{tickerDetails.name}</div>
                 </div>
-                <div className={cn.headerInfoContainer}>
+                <div className={`${cn.headerInfoContainer} ${cn.headerInfoContainerMobile}`}>
                     <div className={cn.priceTitle}>${lastAvailablePrice}</div>
-                    <div>
+                    <div className={cn.priceIndicatorWrapper}>
                         <span className={isPositiveNumber ? cn.pricePositive : cn.priceLow}>{priceDifference}</span>
                         { isPositiveNumber ? <UpArrow /> : <DownArrow /> }
                         <span className={isPositiveNumber ? cn.pricePositive : cn.priceLow}>{changePercent}%</span>
@@ -113,7 +113,7 @@ const SymbolDetailsPage = () => {
                         <ShowMoreText text={tickerDetails.description} />
                     )}
                 </div>
-                <div className={cn.pageSectionItem}>
+                <div className={`${cn.pageSectionItem} ${cn.tagsWrapper}`}>
                     <TagsList
                         title={'Related Stocks'}
                         items={tickerDetails.similar}

@@ -6,6 +6,7 @@ const useStyles = makeStyles(createStyles({
         maxWidth: 508,
         height: 164,
         objectFit: 'cover',
+        borderRadius: 5,
     }
 }));
 

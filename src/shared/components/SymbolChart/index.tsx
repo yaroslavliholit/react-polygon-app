@@ -11,8 +11,8 @@ const SymbolChart = ({chartData}: Props) => {
 
     return (
         <section className={cn.container}>
-            <ResponsiveContainer height={332}>
-                <LineChart width={1080} height={332} data={chartData}>
+            <ResponsiveContainer>
+                <LineChart className={cn.chart} data={chartData}>
                     <Line type="monotone" dataKey="value" stroke="#e51616" strokeWidth={3} dot={false} />
                 </LineChart>
             </ResponsiveContainer>

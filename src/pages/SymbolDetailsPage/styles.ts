@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => createStyles({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        textAlign: 'center',
     },
     header: {
         display: 'flex',
@@ -24,6 +25,16 @@ const useStyles = makeStyles((theme) => createStyles({
         flexWrap: 'wrap',
         alignItems: 'center',
         marginBottom: 8,
+    },
+    headerInfoContainerMobile: {
+        [theme.breakpoints.down('md')]: {
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+        },
+    },
+    priceIndicatorWrapper: {
+        display: 'flex',
+        alignItems: 'center',
     },
     priceTitle: {
         marginRight: 13,
@@ -52,6 +63,9 @@ const useStyles = makeStyles((theme) => createStyles({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         marginBottom: 35,
+        [theme.breakpoints.down('md')]: {
+            marginBottom: 15,
+        },
     },
     pageSectionItem: {
         width: '48%',
@@ -63,6 +77,9 @@ const useStyles = makeStyles((theme) => createStyles({
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
+        [theme.breakpoints.down('md')]: {
+            marginBottom: 20,
+        },
     },
     aboutCompanyInfo: {
         width: '45%',
@@ -81,6 +98,12 @@ const useStyles = makeStyles((theme) => createStyles({
     infoListItemValue: {
         fontWeight: 'bold'
     },
+    tagsWrapper: {
+        [theme.breakpoints.down('md')]: {
+            display: 'flex',
+            flexDirection: 'column-reverse'
+        },
+    }
 }));
 
 export default useStyles;
