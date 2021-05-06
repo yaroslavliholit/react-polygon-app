@@ -7,6 +7,7 @@ import useStyles from './styles';
 import SymbolChart from '../../shared/components/SymbolChart';
 import { ReactComponent as DownArrow } from '../../shared/assets/icons/down-arrow.svg';
 import { ReactComponent as UpArrow } from '../../shared/assets/icons/up-arrow.svg';
+import ShowMoreText from "../../shared/components/ShowMoreText";
 
 const SymbolDetailsPage = () => {
     const history = useHistory();
@@ -79,10 +80,13 @@ const SymbolDetailsPage = () => {
                     </div>
                 </div>
             </section>
+
             <section className={cn.pageSection}>
                 <div className={cn.pageSectionItem}>
                     <h2 className={cn.pageSubTitle}>Description</h2>
-                    <div>{tickerDetails.description}</div>
+                    {tickerDetails.description && (
+                        <ShowMoreText text={tickerDetails.description} />
+                    )}
                 </div>
                 <div className={cn.pageSectionItem}>
                     <TagsList
