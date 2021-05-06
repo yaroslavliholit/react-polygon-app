@@ -1,66 +1,68 @@
-import {createStyles, makeStyles} from "@material-ui/core/styles";
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => createStyles({
+const useStyles = makeStyles((theme) =>
+  createStyles({
     searchWrapper: {
-        position: 'relative',
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderBottom: '1px solid #e9ecf4',
+      position: 'relative',
+      display: 'flex',
+      flexWrap: 'wrap',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      borderBottom: '1px solid #e9ecf4',
     },
     menuButtonWrapper: {
-        display: 'none',
-        [theme.breakpoints.down('sm')]: {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: 50,
-            height: 50,
-            borderRight: '1px solid #e9ecf4',
-        },
+      display: 'none',
+      [theme.breakpoints.down('sm')]: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 50,
+        height: 50,
+        borderRight: '1px solid #e9ecf4',
+      },
     },
     searchField: {
-        border: 'none',
-        width: '100%',
-        [theme.breakpoints.down('sm')]: {
-            width: 'calc(100% - 55px)',
-        },
+      border: 'none',
+      width: '100%',
+      [theme.breakpoints.down('sm')]: {
+        width: 'calc(100% - 55px)',
+      },
     },
     suggestionsWrapper: {
-        position: 'absolute',
-        top: 60,
-        left: 20,
-        maxWidth: 600,
-        maxHeight: 250,
-        zIndex: theme.zIndex.tooltip,
-        overflow: 'scroll',
-        backgroundColor: '#FCFCFC',
-        [theme.breakpoints.down('md')]: {
-            left: 0,
-        },
+      position: 'absolute',
+      top: 60,
+      left: 20,
+      maxWidth: 600,
+      maxHeight: 250,
+      zIndex: theme.zIndex.tooltip,
+      overflow: 'scroll',
+      backgroundColor: '#FCFCFC',
+      [theme.breakpoints.down('md')]: {
+        left: 0,
+      },
     },
     suggestionItem: {
       cursor: 'pointer',
     },
     suggestionTicker: {
-        width: 80,
-        [theme.breakpoints.down('md')]: {
-            width: 70,
-        },
+      width: 80,
+      [theme.breakpoints.down('md')]: {
+        width: 70,
+      },
     },
     suggestionName: {
-        width: 'calc(100% - 80px)',
-        [theme.breakpoints.down('md')]: {
-            width: 'calc(100% - 70px)',
-        },
+      width: 'calc(100% - 80px)',
+      [theme.breakpoints.down('md')]: {
+        width: 'calc(100% - 70px)',
+      },
     },
     clip: {
-        width: 300,
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-    }
-}));
+      width: 300,
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+    },
+  })
+);
 
 export default useStyles;
