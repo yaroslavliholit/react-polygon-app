@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => createStyles({
         left: 20,
         maxWidth: 600,
         maxHeight: 250,
+        zIndex: theme.zIndex.tooltip,
         overflow: 'scroll',
         backgroundColor: '#FCFCFC',
         [theme.breakpoints.down('md')]: {

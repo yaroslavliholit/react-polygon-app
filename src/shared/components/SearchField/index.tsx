@@ -7,6 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import useSearchTickers from "../../../hooks/useSearchTickers";
+import {CircularProgress} from '@material-ui/core';
 
 const SearchField = () => {
     const cn = useStyles();
@@ -15,7 +16,8 @@ const SearchField = () => {
         searchQuery,
         suggestions,
         handleSelectSuggestion,
-        handleChangeSearchQuery
+        handleChangeSearchQuery,
+        suggestionsLoading,
     } = useSearchTickers();
 
     return (
@@ -31,6 +33,11 @@ const SearchField = () => {
                     startAdornment: (
                         <InputAdornment position={'start'}>
                             <SearchIcon htmlColor={'#b6b7c3'} />
+                        </InputAdornment>
+                    ),
+                    endAdornment: (
+                        <InputAdornment position={'end'}>
+                            {suggestionsLoading && <CircularProgress /> }
                         </InputAdornment>
                     ),
                     classes:{notchedOutline:cn.searchField}

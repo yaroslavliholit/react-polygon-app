@@ -7,6 +7,13 @@ const useStyles = makeStyles((theme) => createStyles({
             padding: '30px',
         },
     },
+    loadingWrapper: {
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     header: {
         display: 'flex',
         flexWrap: 'wrap',

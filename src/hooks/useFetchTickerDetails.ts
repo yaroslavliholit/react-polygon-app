@@ -4,13 +4,16 @@ import {ITickerDetailsFormatted} from "@polygon.io/client-js";
 import {getFormatDate} from '../shared/utils/date';
 
 const useFetchTickerDetails = (id: string) => {
-    const [loading, setLoading] = useState(false);
+    const [tickerDetails, setTickerDetails] = useState<Nullable<ITickerDetailsFormatted>>(null);
+    const [tickerDetailsLoading, setTickerDetailsLoading] = useState(false);
+
     const [lastAvailablePrice, setLastAvailablePrice] = useState<Nullable<number>>(null);
     const [priceDifference, setPriceDifference] = useState<Nullable<number>>(null);
-    const [tickerDetails, setTickerDetails] = useState<Nullable<ITickerDetailsFormatted>>(null);
     const [changePercent, setChangePercent] = useState<Nullable<number>>(null);
-
     const [aggregatesBars, setAggregatesBars] = useState<AggregatesBar[]>([]);
+    const [stocksDetailsLoading, setStocksDetailsLoading] = useState(false);
+
+    const isAnyLoading = tickerDetailsLoading || stocksDetailsLoading;
 
     const handleFetchAggregatesBars = useCallback(async () => {
         try {
@@ -32,6 +35,7 @@ const useFetchTickerDetails = (id: string) => {
     }, [id]);
 
     const handleFetchDailyPrice = useCallback(async () => {
+        setStocksDetailsLoading(true);
         try {
             const { close: currentClose } = await polygonRestClient.stocks.dailyOpenClose(
                 id, getFormatDate({ date: new Date(), extraDay:  -1 })
@@ -54,18 +58,20 @@ const useFetchTickerDetails = (id: string) => {
             }
         } catch (e) {
             console.error(e);
+        } finally {
+            setStocksDetailsLoading(false);
         }
     }, [id]);
 
     const handleFetchTickerDetails = useCallback(async () => {
-        setLoading(true);
+        setTickerDetailsLoading(true);
         try {
           const result = await polygonReferenceClient.tickerDetails(id);
           setTickerDetails(result);
         } catch (e) {
             console.error(e)
         } finally {
-            setLoading(false);
+            setTickerDetailsLoading(false);
         }
     }, [id]);
 
@@ -76,14 +82,14 @@ const useFetchTickerDetails = (id: string) => {
     }, [handleFetchTickerDetails, handleFetchDailyPrice, handleFetchAggregatesBars]);
 
     return useMemo(() => ({
-        loading,
+        isAnyLoading,
         aggregatesBars,
         tickerDetails,
         lastAvailablePrice,
         priceDifference,
         changePercent,
     }), [
-        loading,
+        isAnyLoading,
         aggregatesBars,
         tickerDetails,
         lastAvailablePrice,

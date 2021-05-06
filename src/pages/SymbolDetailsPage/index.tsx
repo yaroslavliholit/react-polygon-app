@@ -8,6 +8,7 @@ import SymbolChart from '../../shared/components/SymbolChart';
 import { ReactComponent as DownArrow } from '../../shared/assets/icons/down-arrow.svg';
 import { ReactComponent as UpArrow } from '../../shared/assets/icons/up-arrow.svg';
 import ShowMoreText from "../../shared/components/ShowMoreText";
+import {CircularProgress} from '@material-ui/core';
 
 const SymbolDetailsPage = () => {
     const history = useHistory();
@@ -15,6 +16,7 @@ const SymbolDetailsPage = () => {
 
     const { id } = useParams<{ id: string }>();
     const {
+        isAnyLoading,
         tickerDetails,
         lastAvailablePrice,
         priceDifference,
@@ -34,6 +36,12 @@ const SymbolDetailsPage = () => {
     ];
 
     const isPositiveNumber = Math.sign(priceDifference || -1) !== -1;
+
+    if (isAnyLoading) return (
+        <div className={cn.loadingWrapper}>
+            <CircularProgress />
+        </div>
+    );
 
     if (!tickerDetails || !aggregatesBars.length) return null;
 
