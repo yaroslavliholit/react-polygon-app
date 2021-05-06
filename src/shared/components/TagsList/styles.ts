@@ -1,6 +1,6 @@
 import {createStyles, makeStyles} from "@material-ui/core/styles";
 
-const useStyles = makeStyles(createStyles({
+const useStyles = makeStyles((theme) => createStyles({
     tagsWrapper: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -10,7 +10,7 @@ const useStyles = makeStyles(createStyles({
         marginBottom: 14,
         padding: '6px 16px',
         borderRadius: 4,
-        color: '#ffffff'
+        color: theme.palette.common.white,
     }
 }));
 

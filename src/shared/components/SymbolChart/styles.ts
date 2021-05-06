@@ -1,8 +1,8 @@
 import {createStyles, makeStyles} from "@material-ui/core/styles";
 
-const useStyle = makeStyles(createStyles({
+const useStyle = makeStyles((theme) => createStyles({
     container: {
-        backgroundColor: '#ffffff',
+        backgroundColor: theme.palette.common.white,
         width: '100%'
     },
 }));

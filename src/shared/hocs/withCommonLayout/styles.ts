@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => createStyles({
         height: 35,
         margin: '10px auto',
         borderRadius: '50%',
-        backgroundColor: '#001458',
+        backgroundColor: theme.palette.primary.dark,
     },
     drawer: {
         width: 72,
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => createStyles({
         height: 'inherit',
         border: 'none',
         [theme.breakpoints.up('md')]: {
-            backgroundColor: '#b6b7c3',
+            backgroundColor: theme.palette.text.disabled,
         },
         [theme.breakpoints.down('md')]: {
             display: 'none',

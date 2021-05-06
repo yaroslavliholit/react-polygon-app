@@ -32,11 +32,11 @@ const useStyles = makeStyles((theme) => createStyles({
     },
     priceLow: {
         fontSize: 18,
-        color: '#e51616'
+        color: theme.palette.error.main
     },
     pricePositive: {
         fontSize: 18,
-        color: '#58d38c'
+        color: theme.palette.success.main
     },
     symbolTitle: {
         marginRight: 13,
