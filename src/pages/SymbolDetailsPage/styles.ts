@@ -50,13 +50,25 @@ const useStyles = makeStyles((theme) => createStyles({
     pageSection: {
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginBottom: 35,
     },
     pageSectionItem: {
         width: '48%',
         [theme.breakpoints.down('md')]: {
             width: '100%',
         },
+    },
+    aboutCompanyWrapper: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+    },
+    aboutCompanyInfo: {
+        width: '45%',
+    },
+    aboutCompanyAddress: {
+        width: '40%'
     },
     infoList: {
         margin: 0,

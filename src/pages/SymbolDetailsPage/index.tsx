@@ -10,6 +10,7 @@ import { ReactComponent as UpArrow } from '../../shared/assets/icons/up-arrow.sv
 import ShowMoreText from "../../shared/components/ShowMoreText";
 import {CircularProgress} from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
+import Map from '../../shared/components/Map';
 
 const SymbolDetailsPage = () => {
     const history = useHistory();
@@ -74,13 +75,15 @@ const SymbolDetailsPage = () => {
                 </div>
             </section>
 
-            <SymbolChart chartData={aggregatesBars} />
+            <section className={cn.pageSection}>
+                <SymbolChart chartData={aggregatesBars} />
+            </section>
 
             <section className={cn.pageSection}>
                 <div className={cn.pageSectionItem}>
                     <h2 className={cn.pageSubTitle}>About {tickerDetails.symbol}</h2>
-                    <div className={cn.pageSection}>
-                        <div className={cn.pageSectionItem}>
+                    <div className={cn.aboutCompanyWrapper}>
+                        <div className={cn.aboutCompanyInfo}>
                             <ul className={cn.infoList}>
                                 {companyInfos.map(e => (
                                     <li
@@ -91,13 +94,15 @@ const SymbolDetailsPage = () => {
                                 ))}
                             </ul>
                         </div>
-                        <div className={cn.pageSectionItem}>
+                        <div className={cn.aboutCompanyAddress}>
                             {/* @ts-ignore */}
                             <div>{tickerDetails.hq_address}</div>
                             <div>{tickerDetails.phone}</div>
-
                         </div>
                     </div>
+                </div>
+                <div className={cn.pageSectionItem}>
+                    <Map />
                 </div>
             </section>
 
