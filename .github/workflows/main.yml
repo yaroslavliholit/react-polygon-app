@@ -7,24 +7,14 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Build
-        run: |
-          npm install
-          npm run-script build
-        env:
-          REACT_APP_POLYGON_API_KEY: ${{ secrets.REACT_APP_POLYGON_API_KEY }}
-
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.6.8
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: build
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "react-polygon-app"
+          heroku_email: "yaroslavmailinfobox@gmail.com"
+          usedocker: true
+        env:
+          HD_REACT_APP_API_URL: ${{secrets.REACT_APP_POLYGON_API_KEY}}
