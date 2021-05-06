@@ -17,4 +17,4 @@ jobs:
           heroku_email: "yaroslavmailinfobox@gmail.com"
           usedocker: true
         env:
-          HD_REACT_APP_API_URL: ${{secrets.REACT_APP_POLYGON_API_KEY}}
+          HD_REACT_APP_POLYGON_API_KEY: ${{secrets.REACT_APP_POLYGON_API_KEY}}
