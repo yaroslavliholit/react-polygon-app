@@ -28,8 +28,17 @@ const theme = createMuiTheme({
     error: {
       main: '#E83E3E',
     },
-    grey: {},
+    grey: {
+      50: '#e9ecf4',
+      100: '#FCFCFC',
+    }
   },
+  typography: {
+    subtitle1: {
+      fontWeight: 600,
+      fontSize: 18
+    }
+  }
 });
 
 export default theme;

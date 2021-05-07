@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import withCommonLayout from '../../shared/hocs/withCommonLayout';
 import { useHistory, useParams } from 'react-router-dom';
-import useFetchTickerDetails from '../../hooks/useFetchTickerDetails';
+import useFetchTickerDetails from '../../shared/hooks/useFetchTickerDetails';
 import TagsList from '../../shared/components/TagsList';
 import useStyles from './styles';
 import SymbolChart from '../../shared/components/SymbolChart';
@@ -11,8 +11,11 @@ import ShowMoreText from '../../shared/components/ShowMoreText';
 import { CircularProgress } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Map from '../../shared/components/Map';
+import ErrorIndicator from '../../shared/components/ErrorIndicator';
+import ROUTES_PATHS from "../../app/routes/paths";
 
 const SymbolDetailsPage = () => {
+  // ****** DATA START ******
   const history = useHistory();
   const cn = useStyles();
 
@@ -27,13 +30,6 @@ const SymbolDetailsPage = () => {
     aggregatesBars,
   } = useFetchTickerDetails(id);
 
-  const handleSelectSuggestion = useCallback(
-    (ticker: string) => {
-      history.push(`/symbol/${ticker}`);
-    },
-    [history]
-  );
-
   const companyInfos = [
     { label: 'Selector:', description: tickerDetails?.sector },
     { label: 'Industry:', description: tickerDetails?.industry },
@@ -42,7 +38,18 @@ const SymbolDetailsPage = () => {
   ];
 
   const isPositiveNumber = Math.sign(priceDifference || -1) !== -1;
+  // ****** DATA END ******
 
+  // ****** CALLBACKS START ******
+  const handleSelectSuggestion = useCallback(
+    (ticker: string) => {
+      history.push(ROUTES_PATHS.getSymbolDetailsUrl(ticker));
+    },
+    [history]
+  );
+  // ****** CALLBACKS END ******
+
+  // ****** JSX START ******
   if (isAnyLoading) {
     return (
       <div className={cn.networkIndicatorWrapper}>
@@ -52,11 +59,7 @@ const SymbolDetailsPage = () => {
   }
 
   if (networkError) {
-    return (
-      <div className={cn.networkIndicatorWrapper}>
-        <Typography variant={'h4'}>Something went wrong. Please try again later.</Typography>
-      </div>
-    );
+    return <ErrorIndicator />
   }
 
   if (!tickerDetails || !aggregatesBars.length) return null;
@@ -88,7 +91,7 @@ const SymbolDetailsPage = () => {
 
       <section className={cn.pageSection}>
         <div className={cn.pageSectionItem}>
-          <h2 className={cn.pageSubTitle}>About {tickerDetails.symbol}</h2>
+          <Typography variant={'subtitle1'} gutterBottom>About {tickerDetails.symbol}</Typography>
           <div className={cn.aboutCompanyWrapper}>
             <div className={cn.aboutCompanyInfo}>
               <ul className={cn.infoList}>
@@ -113,7 +116,7 @@ const SymbolDetailsPage = () => {
 
       <section className={cn.pageSection}>
         <div className={cn.pageSectionItem}>
-          <h2 className={cn.pageSubTitle}>Description</h2>
+          <Typography variant={'subtitle1'} gutterBottom>Description</Typography>
           {tickerDetails.description && <ShowMoreText text={tickerDetails.description} />}
         </div>
         <div className={`${cn.pageSectionItem} ${cn.tagsWrapper}`}>
@@ -128,6 +131,7 @@ const SymbolDetailsPage = () => {
       </section>
     </div>
   );
+  // ****** JSX END ******
 };
 
 export default withCommonLayout(SymbolDetailsPage);

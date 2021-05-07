@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) =>
     root: {
       display: 'flex',
       flexWrap: 'wrap',
-      backgroundColor: '#FCFCFC',
+      backgroundColor: theme.palette.grey[100],
     },
     logo: {
       width: 35,

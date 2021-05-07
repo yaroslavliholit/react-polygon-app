@@ -6,7 +6,7 @@ import useStyles from './styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import useSearchTickers from '../../../hooks/useSearchTickers';
+import useSearchTickers from '../../hooks/useSearchTickers';
 import { CircularProgress } from '@material-ui/core';
 import { ReactComponent as MenuIcon } from '../../assets/icons/menu.svg';
 

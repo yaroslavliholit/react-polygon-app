@@ -1,10 +1,10 @@
 import {useCallback, useEffect, useMemo, useState} from "react";
-import {polygonReferenceClient, polygonRestClient} from "../api/polygonReferenceClient";
+import {polygonReferenceClient, polygonRestClient} from "../../api/polygonReferenceClient";
 import {ITickerDetailsFormatted} from "@polygon.io/client-js";
-import {getFormatDate} from '../shared/utils/date';
+import {getFormatDate} from '../utils/date';
 
 const useFetchTickerDetails = (id: string) => {
-    const [networkError, setNetworkError] = useState(false);
+    // ****** DATA START ******
     const [tickerDetails, setTickerDetails] = useState<Nullable<ITickerDetailsFormatted>>(null);
     const [tickerDetailsLoading, setTickerDetailsLoading] = useState(false);
     const [lastAvailablePrice, setLastAvailablePrice] = useState<Nullable<number>>(null);
@@ -12,9 +12,12 @@ const useFetchTickerDetails = (id: string) => {
     const [changePercent, setChangePercent] = useState<Nullable<number>>(null);
     const [aggregatesBars, setAggregatesBars] = useState<AggregatesBar[]>([]);
     const [stocksDetailsLoading, setStocksDetailsLoading] = useState(false);
+    const [networkError, setNetworkError] = useState(false);
 
     const isAnyLoading = tickerDetailsLoading || stocksDetailsLoading;
+    // ****** DATA END ******
 
+    // ****** CALLBACKS START ******
     const handleFetchAggregatesBars = useCallback(async () => {
         try {
           const currentMouth = getFormatDate({ date: new Date() });
@@ -77,12 +80,15 @@ const useFetchTickerDetails = (id: string) => {
             setTickerDetailsLoading(false);
         }
     }, [id]);
+    // ****** CALLBACKS END ******
 
+    // ****** EFFECTS START ******
     useEffect(() => {
         handleFetchTickerDetails();
         handleFetchDailyPrice();
         handleFetchAggregatesBars();
     }, [handleFetchTickerDetails, handleFetchDailyPrice, handleFetchAggregatesBars]);
+    // ****** EFFECTS END ******
 
     return useMemo(() => ({
         networkError,
