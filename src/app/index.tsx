@@ -3,11 +3,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './routes/';
 import { ThemeProvider } from '@material-ui/core';
 import theme from './theme';
+import ErrorBoundary from '../shared/components/ErrorBoundary';
 
 const App = () => (
   <Router>
     <ThemeProvider theme={theme}>
-      <AppRoutes />
+      <ErrorBoundary>
+        <AppRoutes />
+      </ErrorBoundary>
     </ThemeProvider>
   </Router>
 );

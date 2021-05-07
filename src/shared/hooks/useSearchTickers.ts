@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ITickers } from '@polygon.io/client-js';
-import { polygonReferenceClient } from '../api/polygonReferenceClient';
+import { polygonReferenceClient } from '../../api/polygonReferenceClient';
 import { useHistory } from 'react-router-dom';
+import ROUTES_PATHS from "../../app/routes/paths";
 
 const useSearchTickers = () => {
   // ****** DATA START ******
@@ -19,7 +20,7 @@ const useSearchTickers = () => {
     setSearchQuery(e.target.value);
   }, []);
 
-  const handleFetchTickers = useCallback(async () => {
+  const handleFetchTickers = useCallback( async () => {
     setSuggestionsLoading(true);
     try {
       // @ts-ignore
@@ -29,7 +30,6 @@ const useSearchTickers = () => {
         market: 'stocks',
         locale: 'US',
       });
-
       setSuggestions(tickers);
     } catch (e) {
       console.error(e);
@@ -40,7 +40,7 @@ const useSearchTickers = () => {
 
   const handleSelectSuggestion = useCallback(
     (ticker: string) => () => {
-      history.push(`/symbol/${ticker}`);
+      history.push(ROUTES_PATHS.getSymbolDetailsUrl(ticker));
       setSearchQuery('');
     },
     [history]

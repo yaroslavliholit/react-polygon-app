@@ -55,10 +55,6 @@ const useStyles = makeStyles((theme) =>
       fontSize: 22,
       fontWeight: 'bold',
     },
-    pageSubTitle: {
-      fontSize: 18,
-      marginBottom: 14,
-    },
     pageSection: {
       display: 'flex',
       flexWrap: 'wrap',

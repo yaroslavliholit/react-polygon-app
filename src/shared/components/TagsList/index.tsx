@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import useStyles from './styles';
+import Typography from '@material-ui/core/Typography';
 
 interface Props {
   title: string;
@@ -22,7 +23,7 @@ const TagsList = ({ items, colors, title, onItemClick }: Props) => {
     <>
       {Boolean(items?.length) && (
         <div>
-          <h2>{title}</h2>
+          <Typography variant={'subtitle1'} gutterBottom>{title}</Typography>
           <div className={cn.tagsWrapper}>
             {items?.map((e, index) => {
               const isEvenItem = index % 2 === 0;

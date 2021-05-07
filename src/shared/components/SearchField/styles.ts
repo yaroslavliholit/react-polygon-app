@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) =>
       flexWrap: 'wrap',
       alignItems: 'center',
       justifyContent: 'space-between',
-      borderBottom: '1px solid #e9ecf4',
+      borderBottom: `1px solid ${theme.palette.grey[50]}`,
     },
     menuButtonWrapper: {
       display: 'none',
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) =>
         alignItems: 'center',
         width: 50,
         height: 50,
-        borderRight: '1px solid #e9ecf4',
+        borderRight: `1px solid ${theme.palette.grey[50]}`,
       },
     },
     searchField: {
@@ -35,8 +35,9 @@ const useStyles = makeStyles((theme) =>
       maxWidth: 600,
       maxHeight: 250,
       zIndex: theme.zIndex.tooltip,
-      overflow: 'scroll',
-      backgroundColor: '#FCFCFC',
+      overflowY: 'auto',
+      overflowX: 'hidden',
+      backgroundColor: theme.palette.grey[100],
       [theme.breakpoints.down('md')]: {
         left: 0,
       },

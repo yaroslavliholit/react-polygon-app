@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import useTrimText from '../../../hooks/useTrimText';
+import useTrimText from '../../hooks/useTrimText';
 import useStyle from './styles';
 
 interface Props {
