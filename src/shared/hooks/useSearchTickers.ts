@@ -2,7 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ITickers } from '@polygon.io/client-js';
 import { polygonReferenceClient } from '../../api/polygonReferenceClient';
 import { useHistory } from 'react-router-dom';
-import ROUTES_PATHS from "../../app/routes/paths";
+import ROUTES_PATHS from '../../app/routes/paths';
+import debounce from 'lodash.debounce';
 
 const useSearchTickers = () => {
   // ****** DATA START ******
@@ -11,8 +12,7 @@ const useSearchTickers = () => {
   const [suggestionsLoading, setSuggestionsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState<ITickers[]>([]);
-
-  const isSearchEmpty = Boolean(searchQuery.length && !suggestions.length);
+  const [isSearchEmpty, setIsSearchEmpty] = useState(false);
   // ****** DATA END ******
 
   // ****** CALLBACKS START ******
@@ -31,12 +31,20 @@ const useSearchTickers = () => {
         locale: 'US',
       });
       setSuggestions(tickers);
+
+      if (!tickers.length) {
+        setIsSearchEmpty(true);
+      }
     } catch (e) {
       console.error(e);
     } finally {
       setSuggestionsLoading(false);
     }
   }, [searchQuery]);
+
+  const handleTriggerSearchTickers = useMemo(() => {
+    return debounce(handleFetchTickers, 300);
+  }, [handleFetchTickers]);
 
   const handleSelectSuggestion = useCallback(
     (ticker: string) => () => {
@@ -49,10 +57,18 @@ const useSearchTickers = () => {
 
   // ****** EFFECTS START ******
   useEffect(() => {
-    if (searchQuery) {
-      handleFetchTickers();
+    if (!searchQuery) {
+      setIsSearchEmpty(false);
     }
-  }, [searchQuery, handleFetchTickers]);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (searchQuery) {
+      handleTriggerSearchTickers();
+
+      return handleTriggerSearchTickers.cancel;
+    }
+  }, [searchQuery, handleTriggerSearchTickers]);
   // ****** EFFECTS END ******
 
   return useMemo(
