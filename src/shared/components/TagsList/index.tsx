@@ -5,13 +5,13 @@ import Typography from '@material-ui/core/Typography';
 interface Props {
   title: string;
   items?: string[];
-  colors: string[];
+  colors: [string, string];
   onItemClick?: (id: string) => void;
 }
 
 const TagsList = ({ items, colors, title, onItemClick }: Props) => {
   const cn = useStyles();
-  const [oddColor, evenColor] = colors;
+  const [evenColor, oddColor] = colors;
 
   const handleItemClick = (id: string) => () => {
     if (onItemClick) {
@@ -27,7 +27,7 @@ const TagsList = ({ items, colors, title, onItemClick }: Props) => {
           <div className={cn.tagsWrapper}>
             {items?.map((e, index) => {
               const isEvenItem = index % 2 === 0;
-              const backgroundColor = isEvenItem ? oddColor : evenColor;
+              const backgroundColor = isEvenItem ? evenColor : oddColor;
 
               return (
                 <div

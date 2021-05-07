@@ -55,10 +55,13 @@ const useFetchTickerDetails = (id: string) => {
             if (endOfDayClosePrice) {
                 setLastAvailablePrice(endOfDayClosePrice);
 
-                const priceCalculation = Number((endOfDayClosePrice - prevDayClosePrice).toFixed(1));
+                const priceChangeDifference = Number((endOfDayClosePrice - prevDayClosePrice).toFixed(1));
+                const priceChangeDifferencePercent = Number(
+                  ((priceChangeDifference * 100) / endOfDayClosePrice).toFixed(1)
+                );
 
-                setPriceDifference(priceCalculation);
-                setChangePercent(Number(((priceCalculation * 100) / endOfDayClosePrice).toFixed(1)));
+                setPriceDifference(priceChangeDifference);
+                setChangePercent(priceChangeDifferencePercent);
             }
         } catch (e) {
             setNetworkError(true);
