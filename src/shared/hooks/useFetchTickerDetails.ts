@@ -13,7 +13,10 @@ const useFetchTickerDetails = (id: string) => {
     const [changePercent, setChangePercent] = useState<Nullable<number>>(null);
     const [aggregatesBars, setAggregatesBars] = useState<AggregatesBar[]>([]);
     const [stocksDetailsLoading, setStocksDetailsLoading] = useState(false);
-    const [networkError, setNetworkError] = useState(false);
+
+    const [aggregatesBarsNetworkError, setAggregatesBarsNetworkError] = useState(false);
+    const [dailyPriceNetworkError, setDailyPriceNetworkError] = useState(false);
+    const [tickerDetailsNetworkError, setTickerDetailsNetworkError] = useState(false);
 
     const isAnyLoading = tickerDetailsLoading || stocksDetailsLoading;
     // ****** DATA END ******
@@ -34,7 +37,7 @@ const useFetchTickerDetails = (id: string) => {
 
         setAggregatesBars(formatterResult);
         } catch (e) {
-            setNetworkError(true);
+            setAggregatesBarsNetworkError(true);
             console.error(e)
         }
     }, [id]);
@@ -65,7 +68,7 @@ const useFetchTickerDetails = (id: string) => {
                 setChangePercent(priceChangeDifferencePercent);
             }
         } catch (e) {
-            setNetworkError(true);
+            setDailyPriceNetworkError(true);
             console.error(e);
         } finally {
             setStocksDetailsLoading(false);
@@ -78,7 +81,7 @@ const useFetchTickerDetails = (id: string) => {
           const result = await polygonReferenceClient.tickerDetails(id);
           setTickerDetails(result);
         } catch (e) {
-            setNetworkError(true);
+            setTickerDetailsNetworkError(true);
             console.error(e)
         } finally {
             setTickerDetailsLoading(false);
@@ -95,7 +98,9 @@ const useFetchTickerDetails = (id: string) => {
     // ****** EFFECTS END ******
 
     return useMemo(() => ({
-        networkError,
+        aggregatesBarsNetworkError,
+        dailyPriceNetworkError,
+        tickerDetailsNetworkError,
         isAnyLoading,
         aggregatesBars,
         tickerDetails,
@@ -103,13 +108,15 @@ const useFetchTickerDetails = (id: string) => {
         priceDifference,
         changePercent,
     }), [
-        networkError,
+        aggregatesBarsNetworkError,
+        dailyPriceNetworkError,
+        tickerDetailsNetworkError,
         isAnyLoading,
         aggregatesBars,
         tickerDetails,
         lastAvailablePrice,
         priceDifference,
-        changePercent
+        changePercent,
     ]);
 };
 

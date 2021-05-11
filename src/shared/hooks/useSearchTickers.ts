@@ -24,13 +24,13 @@ const useSearchTickers = () => {
   const handleFetchTickers = useCallback( async () => {
     setSuggestionsLoading(true);
     try {
-      // @ts-ignore
       const { tickers } = await polygonReferenceClient.tickers({
         search: searchQuery,
         active: true,
         market: 'stocks',
         locale: 'US',
-      });
+      }) as unknown as { tickers: ITickers[] };
+
       setSuggestions(tickers);
 
       if (!tickers.length) {

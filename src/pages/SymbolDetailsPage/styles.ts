@@ -10,8 +10,8 @@ const useStyles = makeStyles((theme) =>
     },
     networkIndicatorWrapper: {
       width: '100%',
-      height: '100vh',
       display: 'flex',
+      margin: 20,
       justifyContent: 'center',
       alignItems: 'center',
       textAlign: 'center',

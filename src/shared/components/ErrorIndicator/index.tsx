@@ -3,11 +3,17 @@ import Typography from '@material-ui/core/Typography';
 
 import useStyles from '../../../pages/SymbolDetailsPage/styles';
 
-const ErrorIndicator = () => {
+interface Props {
+  displayVariant?: 'small' | 'default';
+}
+
+const ErrorIndicator = ({ displayVariant = 'default' }: Props) => {
   const cn = useStyles();
+  const typographySizeVariant = displayVariant === 'default' ? 'h4' : 'body1';
+
   return (
     <div className={cn.networkIndicatorWrapper}>
-      <Typography variant={'h4'}>Something went wrong. Please try again later.</Typography>
+      <Typography variant={typographySizeVariant}>Something went wrong. Please try again later.</Typography>
     </div>
   );
 }
