@@ -1,5 +1,6 @@
 import React, {memo} from 'react';
-import Typography from "@material-ui/core/Typography";
+import Typography from '@material-ui/core/Typography';
+
 import useStyles from '../../../pages/SymbolDetailsPage/styles';
 
 const ErrorIndicator = () => {

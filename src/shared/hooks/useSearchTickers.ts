@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ITickers } from '@polygon.io/client-js';
-import { polygonReferenceClient } from '../../api/polygonReferenceClient';
 import { useHistory } from 'react-router-dom';
-import ROUTES_PATHS from '../../app/routes/paths';
+import { ITickers } from '@polygon.io/client-js';
 import debounce from 'lodash.debounce';
+
+import ROUTES_PATHS from '../../app/routes/paths';
+import { polygonReferenceClient } from '../../api/polygonReferenceClient';
 
 const useSearchTickers = () => {
   // ****** DATA START ******

@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { LineChart, Line, ResponsiveContainer } from 'recharts';
+
 import useStyle from './styles';
 
 interface Props {

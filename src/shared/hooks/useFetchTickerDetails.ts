@@ -1,7 +1,8 @@
 import {useCallback, useEffect, useMemo, useState} from "react";
-import {polygonReferenceClient, polygonRestClient} from "../../api/polygonReferenceClient";
 import {ITickerDetailsFormatted} from "@polygon.io/client-js";
+
 import {getFormatDate} from '../utils/date';
+import {polygonReferenceClient, polygonRestClient} from "../../api/polygonReferenceClient";
 
 const useFetchTickerDetails = (id: string) => {
     // ****** DATA START ******

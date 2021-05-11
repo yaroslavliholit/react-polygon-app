@@ -1,4 +1,5 @@
 import React from 'react';
+
 import MockMapImage from '../../assets/images/map.png';
 import useStyles from './styles';
 

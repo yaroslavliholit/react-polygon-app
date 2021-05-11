@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
-import withCommonLayout from '../../shared/hocs/withCommonLayout';
+import Typography from '@material-ui/core/Typography';
 import { useHistory, useParams } from 'react-router-dom';
+import { CircularProgress } from '@material-ui/core';
+
 import useFetchTickerDetails from '../../shared/hooks/useFetchTickerDetails';
 import TagsList from '../../shared/components/TagsList';
 import useStyles from './styles';
@@ -8,11 +10,10 @@ import SymbolChart from '../../shared/components/SymbolChart';
 import { ReactComponent as DownArrow } from '../../shared/assets/icons/down-arrow.svg';
 import { ReactComponent as UpArrow } from '../../shared/assets/icons/up-arrow.svg';
 import ShowMoreText from '../../shared/components/ShowMoreText';
-import { CircularProgress } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import Map from '../../shared/components/Map';
 import ErrorIndicator from '../../shared/components/ErrorIndicator';
-import ROUTES_PATHS from "../../app/routes/paths";
+import ROUTES_PATHS from '../../app/routes/paths';
+import withCommonLayout from '../../shared/hocs/withCommonLayout';
 
 const SymbolDetailsPage = () => {
   // ****** DATA START ******

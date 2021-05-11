@@ -1,9 +1,10 @@
 import React, { memo } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import AppRoutes from './routes/';
 import { ThemeProvider } from '@material-ui/core';
-import theme from './theme';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import ErrorBoundary from '../shared/components/ErrorBoundary';
+import AppRoutes from './routes/';
+import theme from './theme';
 
 const App = () => (
   <Router>
