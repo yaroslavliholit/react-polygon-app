@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 import Typography from '@material-ui/core/Typography';
 
 import useStyles from '../../../pages/SymbolDetailsPage/styles';
@@ -13,9 +13,11 @@ const ErrorIndicator = ({ displayVariant = 'default' }: Props) => {
 
   return (
     <div className={cn.networkIndicatorWrapper}>
-      <Typography variant={typographySizeVariant}>Something went wrong. Please try again later.</Typography>
+      <Typography variant={typographySizeVariant}>
+        Something went wrong. Please try again later.
+      </Typography>
     </div>
   );
-}
+};
 
 export default memo(ErrorIndicator);

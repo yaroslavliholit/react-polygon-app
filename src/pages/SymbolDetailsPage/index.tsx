@@ -72,33 +72,37 @@ const SymbolDetailsPage = () => {
           <div className={cn.symbolTitle}>{tickerDetails.symbol}</div>
           <div>{tickerDetails.name}</div>
         </div>
-        {dailyPriceNetworkError
-            ? <ErrorIndicator displayVariant={'small'} />
-            : (
-                <div className={`${cn.headerInfoContainer} ${cn.headerInfoContainerMobile}`}>
-                  <div className={cn.priceTitle}>${lastAvailablePrice}</div>
-                  <div className={cn.priceIndicatorWrapper}>
-                  <span className={isPositiveNumber ? cn.pricePositive : cn.priceLow}>
-                    {priceDifference}
-                  </span>
-                    {isPositiveNumber ? <UpArrow /> : <DownArrow />}
-                    <span className={isPositiveNumber ? cn.pricePositive : cn.priceLow}>
-                      {changePercent}%
-                    </span>
-                  </div>
-                </div>
-            )}
+        {dailyPriceNetworkError ? (
+          <ErrorIndicator displayVariant={'small'} />
+        ) : (
+          <div className={`${cn.headerInfoContainer} ${cn.headerInfoContainerMobile}`}>
+            <div className={cn.priceTitle}>${lastAvailablePrice}</div>
+            <div className={cn.priceIndicatorWrapper}>
+              <span className={isPositiveNumber ? cn.pricePositive : cn.priceLow}>
+                {priceDifference}
+              </span>
+              {isPositiveNumber ? <UpArrow /> : <DownArrow />}
+              <span className={isPositiveNumber ? cn.pricePositive : cn.priceLow}>
+                {changePercent}%
+              </span>
+            </div>
+          </div>
+        )}
       </section>
 
       <section className={cn.pageSection}>
-        {aggregatesBarsNetworkError
-            ? <ErrorIndicator displayVariant={'small'} />
-            : <SymbolChart chartData={aggregatesBars} />}
+        {aggregatesBarsNetworkError ? (
+          <ErrorIndicator displayVariant={'small'} />
+        ) : (
+          <SymbolChart chartData={aggregatesBars} />
+        )}
       </section>
 
       <section className={cn.pageSection}>
         <div className={cn.pageSectionItem}>
-          <Typography variant={'subtitle1'} gutterBottom>About {tickerDetails.symbol}</Typography>
+          <Typography variant={'subtitle1'} gutterBottom>
+            About {tickerDetails.symbol}
+          </Typography>
           <div className={cn.aboutCompanyWrapper}>
             <div className={cn.aboutCompanyInfo}>
               <ul className={cn.infoList}>
@@ -123,7 +127,9 @@ const SymbolDetailsPage = () => {
 
       <section className={cn.pageSection}>
         <div className={cn.pageSectionItem}>
-          <Typography variant={'subtitle1'} gutterBottom>Description</Typography>
+          <Typography variant={'subtitle1'} gutterBottom>
+            Description
+          </Typography>
           {tickerDetails.description && <ShowMoreText text={tickerDetails.description} />}
         </div>
         <div className={`${cn.pageSectionItem} ${cn.tagsWrapper}`}>
