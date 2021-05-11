@@ -1,9 +1,9 @@
 import React, { memo, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { CircularProgress } from '@material-ui/core';
+
 import { SearchPage, SymbolDetailsPage } from './lazyPages';
 import ROUTES_PATHS from './paths';
-
-import { CircularProgress } from '@material-ui/core';
 
 const AppRoutes = () => (
   <Switch>

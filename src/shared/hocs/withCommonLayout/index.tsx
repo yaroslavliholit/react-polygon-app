@@ -1,5 +1,6 @@
 import React, { ComponentType, PropsWithChildren } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
+
 import SearchField from '../../components/SearchField';
 import useStyles from './styles';
 

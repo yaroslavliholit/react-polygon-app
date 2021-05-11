@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
-import withCommonLayout from '../../shared/hocs/withCommonLayout';
+import Typography from '@material-ui/core/Typography';
 import { useHistory, useParams } from 'react-router-dom';
+import { CircularProgress } from '@material-ui/core';
+
 import useFetchTickerDetails from '../../shared/hooks/useFetchTickerDetails';
 import TagsList from '../../shared/components/TagsList';
 import useStyles from './styles';
@@ -8,11 +10,10 @@ import SymbolChart from '../../shared/components/SymbolChart';
 import { ReactComponent as DownArrow } from '../../shared/assets/icons/down-arrow.svg';
 import { ReactComponent as UpArrow } from '../../shared/assets/icons/up-arrow.svg';
 import ShowMoreText from '../../shared/components/ShowMoreText';
-import { CircularProgress } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import Map from '../../shared/components/Map';
 import ErrorIndicator from '../../shared/components/ErrorIndicator';
-import ROUTES_PATHS from "../../app/routes/paths";
+import ROUTES_PATHS from '../../app/routes/paths';
+import withCommonLayout from '../../shared/hocs/withCommonLayout';
 
 const SymbolDetailsPage = () => {
   // ****** DATA START ******
@@ -21,7 +22,9 @@ const SymbolDetailsPage = () => {
 
   const { id } = useParams<{ id: string }>();
   const {
-    networkError,
+    tickerDetailsNetworkError,
+    aggregatesBarsNetworkError,
+    dailyPriceNetworkError,
     isAnyLoading,
     tickerDetails,
     lastAvailablePrice,
@@ -58,11 +61,9 @@ const SymbolDetailsPage = () => {
     );
   }
 
-  if (networkError) {
-    return <ErrorIndicator />
-  }
+  if (tickerDetailsNetworkError) return <ErrorIndicator />;
 
-  if (!tickerDetails || !aggregatesBars.length) return null;
+  if (!tickerDetails) return null;
 
   return (
     <div className={cn.pageWrapper}>
@@ -71,27 +72,37 @@ const SymbolDetailsPage = () => {
           <div className={cn.symbolTitle}>{tickerDetails.symbol}</div>
           <div>{tickerDetails.name}</div>
         </div>
-        <div className={`${cn.headerInfoContainer} ${cn.headerInfoContainerMobile}`}>
-          <div className={cn.priceTitle}>${lastAvailablePrice}</div>
-          <div className={cn.priceIndicatorWrapper}>
-            <span className={isPositiveNumber ? cn.pricePositive : cn.priceLow}>
-              {priceDifference}
-            </span>
-            {isPositiveNumber ? <UpArrow /> : <DownArrow />}
-            <span className={isPositiveNumber ? cn.pricePositive : cn.priceLow}>
-              {changePercent}%
-            </span>
+        {dailyPriceNetworkError ? (
+          <ErrorIndicator displayVariant={'small'} />
+        ) : (
+          <div className={`${cn.headerInfoContainer} ${cn.headerInfoContainerMobile}`}>
+            <div className={cn.priceTitle}>${lastAvailablePrice}</div>
+            <div className={cn.priceIndicatorWrapper}>
+              <span className={isPositiveNumber ? cn.pricePositive : cn.priceLow}>
+                {priceDifference}
+              </span>
+              {isPositiveNumber ? <UpArrow /> : <DownArrow />}
+              <span className={isPositiveNumber ? cn.pricePositive : cn.priceLow}>
+                {changePercent}%
+              </span>
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       <section className={cn.pageSection}>
-        <SymbolChart chartData={aggregatesBars} />
+        {aggregatesBarsNetworkError ? (
+          <ErrorIndicator displayVariant={'small'} />
+        ) : (
+          <SymbolChart chartData={aggregatesBars} />
+        )}
       </section>
 
       <section className={cn.pageSection}>
         <div className={cn.pageSectionItem}>
-          <Typography variant={'subtitle1'} gutterBottom>About {tickerDetails.symbol}</Typography>
+          <Typography variant={'subtitle1'} gutterBottom>
+            About {tickerDetails.symbol}
+          </Typography>
           <div className={cn.aboutCompanyWrapper}>
             <div className={cn.aboutCompanyInfo}>
               <ul className={cn.infoList}>
@@ -116,7 +127,9 @@ const SymbolDetailsPage = () => {
 
       <section className={cn.pageSection}>
         <div className={cn.pageSectionItem}>
-          <Typography variant={'subtitle1'} gutterBottom>Description</Typography>
+          <Typography variant={'subtitle1'} gutterBottom>
+            Description
+          </Typography>
           {tickerDetails.description && <ShowMoreText text={tickerDetails.description} />}
         </div>
         <div className={`${cn.pageSectionItem} ${cn.tagsWrapper}`}>

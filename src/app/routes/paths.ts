@@ -3,7 +3,7 @@ const ROUTES_PATHS = {
   symbolDetails: '/symbol/:id',
   getSymbolDetailsUrl(id: string) {
     return `/symbol/${id}`;
-  }
+  },
 };
 
 export default ROUTES_PATHS;

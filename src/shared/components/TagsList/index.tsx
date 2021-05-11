@@ -23,7 +23,9 @@ const TagsList = ({ items, colors, title, onItemClick }: Props) => {
     <>
       {Boolean(items?.length) && (
         <div>
-          <Typography variant={'subtitle1'} gutterBottom>{title}</Typography>
+          <Typography variant={'subtitle1'} gutterBottom>
+            {title}
+          </Typography>
           <div className={cn.tagsWrapper}>
             {items?.map((e, index) => {
               const isEvenItem = index % 2 === 0;

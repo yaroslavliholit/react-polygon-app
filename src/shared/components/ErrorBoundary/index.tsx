@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+
 import ErrorIndicator from '../ErrorIndicator';
 
 class ErrorBoundary extends Component {

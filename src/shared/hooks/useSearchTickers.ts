@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ITickers } from '@polygon.io/client-js';
-import { polygonReferenceClient } from '../../api/polygonReferenceClient';
 import { useHistory } from 'react-router-dom';
-import ROUTES_PATHS from '../../app/routes/paths';
+import { ITickers } from '@polygon.io/client-js';
 import debounce from 'lodash.debounce';
+
+import ROUTES_PATHS from '../../app/routes/paths';
+import { polygonReferenceClient } from '../../api/polygonReferenceClient';
 
 const useSearchTickers = () => {
   // ****** DATA START ******
@@ -23,13 +24,13 @@ const useSearchTickers = () => {
   const handleFetchTickers = useCallback( async () => {
     setSuggestionsLoading(true);
     try {
-      // @ts-ignore
       const { tickers } = await polygonReferenceClient.tickers({
         search: searchQuery,
         active: true,
         market: 'stocks',
         locale: 'US',
-      });
+      }) as unknown as { tickers: ITickers[] };
+
       setSuggestions(tickers);
 
       if (!tickers.length) {

@@ -31,14 +31,14 @@ const theme = createMuiTheme({
     grey: {
       50: '#e9ecf4',
       100: '#FCFCFC',
-    }
+    },
   },
   typography: {
     subtitle1: {
       fontWeight: 600,
-      fontSize: 18
-    }
-  }
+      fontSize: 18,
+    },
+  },
 });
 
 export default theme;
