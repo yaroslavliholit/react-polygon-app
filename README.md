@@ -1,8 +1,6 @@
 # About
 Data visualization application using polygon.io API.
 
-# Live Demo - https://react-polygon-app.herokuapp.com/
-
 # How to run the application locally
 
 - Make sure you have the LTS version for Node.js, and the yarn package manager installed
